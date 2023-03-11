@@ -5,7 +5,7 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
         "target": "node",
@@ -15,9 +15,12 @@
         "tsConfig": "apps/my-mono/tsconfig.app.json",
         "assets": ["apps/my-mono/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/my-mono/webpack.config.js"
+        "configFile": "apps/my-mono/vite.config.ts"
       },
       "configurations": {
+        "develop": {
+          "watch": true
+        },
         "production": {
           "optimization": true,
           "extractLicenses": true,
@@ -26,7 +29,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/js:node",
+      "executor": "@nrwl/vite:dev-server",
       "options": {
         "buildTarget": "my-mono:build"
       },
