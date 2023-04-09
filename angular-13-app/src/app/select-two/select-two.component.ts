@@ -1,5 +1,5 @@
 
-import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
+import { CdkConnectedOverlay, CdkOverlayOrigin, OverlayRef, ViewportRuler } from '@angular/cdk/overlay';
 import { Component, OnInit, ViewChild, AfterViewInit, HostListener, ChangeDetectorRef, ChangeDetectionStrategy, ApplicationRef, ElementRef } from '@angular/core';
 import { MAT_SELECT_CONFIG, MatSelect } from '@angular/material/select';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -39,32 +39,69 @@ export class SelectTwoComponent implements OnInit, AfterViewInit {
   public changed: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
 
-  constructor() { }
+  constructor(protected _viewportRuler: ViewportRuler, protected _changeDetectorRef: ChangeDetectorRef) { }
 
 
   ngOnInit(): void {
+
   }
 
   ngAfterViewInit(): void {
+    // this.select?._openedStream.subscribe((opened) => {
+    //   if (this.select?.panelOpen) {
+    //     this.calculateTriggerWidth();
+    //   }
+    // });
+
     if (!this.select || !this.target) {
       return;
     }
 
     this.select._positions = [];
 
+    this.select.trigger = this.target;
+
+    // //@ts-ignore
+    // const selectOverlay = this.select._overlayDir;
+
+    // selectOverlay.origin = this.target;
+    // this.calculateTriggerWidth();
+  }
+
+  // private watchTriggerWidth() {
+  //   this._viewportRuler
+  //     .change()
+  //     .subscribe(() => {
+  //       if (this.select?.panelOpen) {
+  //         this.calculateTriggerWidth()
+
+  //       }
+  //     })
+  // }
+
+  private calculateTriggerWidth() {
+    if (!this.select) {
+      return;
+    }
+
+    const rect = this.target?.nativeElement.getBoundingClientRect();
     //@ts-ignore
-    const selectOverlay = this.select._overlayDir;
+    const selectOverlay: CdkConnectedOverlay = this.select._overlayDir;
 
-    selectOverlay.origin = this.target;
+    this.select._triggerRect = rect;
+    this.select.trigger
+    selectOverlay.minWidth = rect.width;
+    selectOverlay.width = rect.width;
+    selectOverlay.overlayRef.updateSize({ width: rect.width });
 
-    const width = this.target.nativeElement.getBoundingClientRect().width;
-
-    // get the bounding box of target
-    selectOverlay.minWidth = width;
+    this.select.stateChanges.next();
+    this._changeDetectorRef.detectChanges();
+    this.select.stateChanges.next();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.select?.stateChanges.next();
+    if (this.select?.panelOpen)
+      this.calculateTriggerWidth();
   }
 }
