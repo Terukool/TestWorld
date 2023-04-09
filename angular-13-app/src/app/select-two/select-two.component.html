@@ -1,9 +1,13 @@
-<mat-form-field class="container">
-  <mat-label>Pokemon</mat-label>
-  <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true">
-    <mat-option>-- None --</mat-option>
-    <mat-option *ngFor="let item of items" [value]="item">
-        {{item.name}}
-      </mat-option>
-  </mat-select>
-</mat-form-field>
+<div #target cdkOverlayOrigin>
+    <mat-form-field>
+        <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel"
+            [class.focused]="select.focused" placeholder="hello" #select>
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let item of items" [value]="item">
+                {{item.name}}
+            </mat-option>
+        </mat-select>
+
+        <mat-icon matSuffix>arrow_drop_down</mat-icon>
+    </mat-form-field>
+</div>
