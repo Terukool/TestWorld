@@ -12,7 +12,7 @@ interface Item {
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss']
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements OnInit, AfterViewInit {
 
   public selectedItem?: Item; 
   public items: Item[] = [
@@ -24,9 +24,22 @@ export class SelectComponent implements OnInit {
     { id: 6, name: 'Item 6' },
   ];
 
+  @ViewChild('container') container?: ElementRef<HTMLElement>;
+  @ViewChild('dropdownIcon') dropdownIcon?: ElementRef<HTMLElement>;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+      const boundingBox = this.container?.nativeElement;
+      const dropdownIcon = this.dropdownIcon?.nativeElement;
+      if (!boundingBox || !dropdownIcon) {
+        return;
+      }
+
+      boundingBox.querySelector('.ng-arrow')?.replaceWith(dropdownIcon);
   }
 
   isItem(item: unknown): item is Item {
