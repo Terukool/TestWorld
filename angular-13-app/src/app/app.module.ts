@@ -12,11 +12,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { SelectTwoComponent } from './select-two/select-two.component';
+import { SelectMaterialComponent } from './select-material/select-material.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SelectComponent
+    SelectComponent,
+    SelectTwoComponent,
+    SelectMaterialComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatCheckboxModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]
