@@ -1,0 +1,23 @@
+<ng-select [items]="items" bindLabel="name" bindValue="id" groupBy="category" placeholder="Select item"
+    [(ngModel)]="selectedItem" [searchable]="true" [multiple]="true" [closeOnSelect]="false">
+    <ng-option *ngFor="let item of items" [value]="item">
+        {{item.name}}
+    </ng-option>
+
+    <ng-template ng-multi-label-כ let-items="items" let-clear="clear">
+        <div class="ng-value chips" *ngFor="let item  of items | slice:0:3">
+            <span class="ng-value-label" *ngIf="isItem(item)"> {{ item.id + item.name}}</span>
+            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">X</span>
+        </div>
+        <div class="ng-value chips" *ngIf="items.length > 3">
+            <span class="ng-value-label">{{items.length - 3}} more...</span>
+        </div>
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <div>
+            <mat-checkbox id="item-{{index}}" type="checkbox" [checked]="item$.selected"
+                (click)="$event.preventDefault()">
+                {{item.name + item$.selected}} </mat-checkbox>
+        </div>
+    </ng-template>
+</ng-select>

@@ -1,0 +1,11 @@
+$ng-select-primary-text: yellow;
+
+::ng-deep .chips {
+    border-radius: 30px !important;
+    padding: 10px;
+}
+
+::ng-deep .ng-arrow {
+    display: none !important;
+    
+}
