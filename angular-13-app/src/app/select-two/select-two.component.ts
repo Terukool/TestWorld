@@ -43,16 +43,10 @@ export class SelectTwoComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-
+    //this.select?.trigger = this.target;
   }
 
   ngAfterViewInit(): void {
-    // this.select?._openedStream.subscribe((opened) => {
-    //   if (this.select?.panelOpen) {
-    //     this.calculateTriggerWidth();
-    //   }
-    // });
-
     if (!this.select || !this.target) {
       return;
     }
@@ -60,48 +54,6 @@ export class SelectTwoComponent implements OnInit, AfterViewInit {
     this.select._positions = [];
 
     this.select.trigger = this.target;
-
-    // //@ts-ignore
-    // const selectOverlay = this.select._overlayDir;
-
-    // selectOverlay.origin = this.target;
-    // this.calculateTriggerWidth();
   }
 
-  // private watchTriggerWidth() {
-  //   this._viewportRuler
-  //     .change()
-  //     .subscribe(() => {
-  //       if (this.select?.panelOpen) {
-  //         this.calculateTriggerWidth()
-
-  //       }
-  //     })
-  // }
-
-  private calculateTriggerWidth() {
-    if (!this.select) {
-      return;
-    }
-
-    const rect = this.target?.nativeElement.getBoundingClientRect();
-    //@ts-ignore
-    const selectOverlay: CdkConnectedOverlay = this.select._overlayDir;
-
-    this.select._triggerRect = rect;
-    this.select.trigger
-    selectOverlay.minWidth = rect.width;
-    selectOverlay.width = rect.width;
-    selectOverlay.overlayRef.updateSize({ width: rect.width });
-
-    this.select.stateChanges.next();
-    this._changeDetectorRef.detectChanges();
-    this.select.stateChanges.next();
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (this.select?.panelOpen)
-      this.calculateTriggerWidth();
-  }
 }
