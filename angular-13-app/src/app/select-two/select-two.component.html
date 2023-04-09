@@ -1,7 +1,6 @@
-<div #target cdkOverlayOrigin>
+<div #target cdkOverlayOrigin class="container">
     <mat-form-field>
-        <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel"
-            [class.focused]="select.focused" placeholder="hello" #select>
+        <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel" placeholder="hello" #select>
             <mat-option>-- None --</mat-option>
             <mat-option *ngFor="let item of items" [value]="item">
                 {{item.name}}

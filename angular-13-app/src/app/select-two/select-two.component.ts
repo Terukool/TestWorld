@@ -1,6 +1,6 @@
 
 import { CdkConnectedOverlay, CdkOverlayOrigin, OverlayRef, ViewportRuler } from '@angular/cdk/overlay';
-import { Component, OnInit, ViewChild, AfterViewInit, HostListener, ChangeDetectorRef, ChangeDetectionStrategy, ApplicationRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, HostListener, ChangeDetectorRef, ChangeDetectionStrategy, ApplicationRef, ElementRef, OnChanges } from '@angular/core';
 import { MAT_SELECT_CONFIG, MatSelect } from '@angular/material/select';
 import { BehaviorSubject, Subject } from 'rxjs';
 
@@ -54,6 +54,16 @@ export class SelectTwoComponent implements OnInit, AfterViewInit {
     this.select._positions = [];
 
     this.select.trigger = this.target;
+    //@ts-ignore
+    this.select._overlayDir.origin = this.target;
+
+    this.select.openedChange.subscribe(() => {
+      if (this.select?.panelOpen && this.target && this.select.trigger !== this.target) {
+        this.select.trigger = this.target;
+        this.select.toggle();
+        this.select.toggle();
+      }
+    });
   }
 
 }
