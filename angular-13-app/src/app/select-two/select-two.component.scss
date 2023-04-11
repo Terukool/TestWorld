@@ -4,10 +4,17 @@
 
         div[role=listbox].ng-trigger {
             min-width: 100% !important;
-            border-radius: 0 0 10px 10px;
             border: 1px solid black;
             box-shadow: none !important;
             box-sizing: border-box;
+
+            &:has(.open-below) {
+                border-radius: 0 0 5px 5px;
+            }
+
+            &:has(.open-above) {
+                border-radius: 5px 5px 0 0;
+            }
         }
     }
 
@@ -21,8 +28,17 @@
     }
 
     .mat-form-field.mat-focused {
-        .mat-select-trigger {
-            border-radius: 5px 5px 0 0;
+
+        &.open-below {
+            .mat-select-trigger {
+                border-radius: 5px 5px 0 0;
+            }
+        }
+
+        &.open-above {
+            .mat-select-trigger {
+                border-radius: 0 0 5px 5px;
+            }
         }
     }
 

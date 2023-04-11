@@ -1,4 +1,4 @@
-<mat-form-field>
+<mat-form-field [ngClass]="(positionStrategy$ | async)!">
     <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel"
         placeholder="hello" #select>
         <mat-select-trigger>
@@ -7,10 +7,13 @@
                 <br />
             </div>
         </mat-select-trigger>
-        <mat-option>-- None --</mat-option>
-        <mat-option *ngFor="let item of items" [value]="item">
-            {{item.name}}
-        </mat-option>
+        <div class="overlay-container" [ngClass]="(positionStrategy$ | async)!">
+            {{ positionStrategy$ | async }}
+            <mat-option>-- None --</mat-option>
+            <mat-option *ngFor="let item of items" [value]="item">
+                {{item.name}}
+            </mat-option>
+        </div>
     </mat-select>
 
     <mat-icon matSuffix>arrow_drop_down</mat-icon>
