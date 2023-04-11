@@ -49,7 +49,12 @@ export class SelectTwoComponent implements AfterViewInit {
 
     const resizeObserver = new ResizeObserver(() => {
       //@ts-ignore
-      this.select?._overlayDir?.overlayRef?.updatePosition();
+      const overlayRef = this.select?._overlayDir?.overlayRef;
+
+      if (this.select?.panelOpen && overlayRef) {
+        overlayRef.updatePosition();
+        overlayRef.updateSize({ minWidth: this.select?.trigger?.nativeElement?.offsetWidth });
+      }
     })
 
     resizeObserver.observe(this.select.trigger.nativeElement);
