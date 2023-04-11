@@ -1,14 +1,8 @@
-.container {
-    width: 100%;
-    overflow:none;
-    box-sizing: border-box;
-}
-
 ::ng-deep {
     .custom-panel {
         transform: none !important;
 
-        .ng-trigger {
+        div[role=listbox].ng-trigger {
             min-width: 100% !important;
             border-radius: 0 0 10px 10px;
             border: 1px solid black;
@@ -19,41 +13,38 @@
 
     .mat-form-field {
         width: 100%;
-        border-radius: 5px;
-        border: 5px solid black;
-        box-sizing: border-box;
+        position: relative;
+
+        .mat-form-field-infix {
+            position: unset !important;
+        }
     }
 
     .mat-form-field.mat-focused {
-        border-radius: 5px 5px 0 0;
+        .mat-select-trigger {
+            border-radius: 5px 5px 0 0;
+        }
     }
 
-    // .mat-select {
-    //     // .mat-select-trigger {
-    //     //     display: flex !important;
-    //     //     align-items: center;
-    //     //     width: 100%;
-    //     //     min-height: 2.5em !important;
+    .mat-select {
+        .mat-select-trigger {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid black;
 
-    //     //     .mat-select-value {
-    //     //         display: block;
-    //     //         flex: 1 1;
-    //     //         border-radius: 5px;
-    //     //         box-sizing: border-box;
-    //     //         border: 2px solid black;
-    //     //         min-width: 100%;
-    //     //         height: 100%;
-    //     //         display: flex;
-    //     //         align-items: center;
-    //     //         padding: 5px;
-    //     //     }
-    //     }
-
-    //     &.focused {
-    //         .mat-select-value {
-    //             border-radius: 5px 5px 0 0;
-    //             transition: 0s;
-    //         }
+            .mat-select-value {
+                width: 100%;
+                min-height: 100%;
+            }
+        }
+    }
 
     .mat-form-field-underline {
         display: none;

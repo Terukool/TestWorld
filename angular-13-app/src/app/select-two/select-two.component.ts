@@ -22,12 +22,11 @@ interface Item {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTwoComponent implements OnInit, AfterViewInit {
+export class SelectTwoComponent implements AfterViewInit {
 
   @ViewChild('select') select?: MatSelect;
-  @ViewChild('target') target?: ElementRef;
 
-  public selectedItem?: Item;
+  public selectedItem?: Item[] = [];
   public items: Item[] = [
     { id: 1, name: 'Item 1', category: 'Category 1' },
     { id: 2, name: 'Item 2', category: 'Category 1' },
@@ -41,29 +40,19 @@ export class SelectTwoComponent implements OnInit, AfterViewInit {
 
   constructor(protected _viewportRuler: ViewportRuler, protected _changeDetectorRef: ChangeDetectorRef) { }
 
-
-  ngOnInit(): void {
-    //this.select?.trigger = this.target;
-  }
-
   ngAfterViewInit(): void {
-    if (!this.select || !this.target) {
+    if (!this.select) {
       return;
     }
 
     this.select._positions = [];
 
-    this.select.trigger = this.target;
-    //@ts-ignore
-    this.select._overlayDir.origin = this.target;
+    const resizeObserver = new ResizeObserver(() => {
+      //@ts-ignore
+      this.select?._overlayDir?.overlayRef?.updatePosition();
+    })
 
-    this.select.openedChange.subscribe(() => {
-      if (this.select?.panelOpen && this.target && this.select.trigger !== this.target) {
-        this.select.trigger = this.target;
-        this.select.toggle();
-        this.select.toggle();
-      }
-    });
+    resizeObserver.observe(this.select.trigger.nativeElement);
   }
 
 }

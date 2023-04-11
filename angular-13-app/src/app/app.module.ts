@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectTwoComponent } from './select-two/select-two.component';
@@ -34,6 +34,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatCheckboxModule,
     MatSelectModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     OverlayModule
   ],
   providers: [],

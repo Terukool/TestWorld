@@ -1,12 +1,17 @@
-<div #target cdkOverlayOrigin class="container">
-    <mat-form-field>
-        <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel" placeholder="hello" #select>
-            <mat-option>-- None --</mat-option>
-            <mat-option *ngFor="let item of items" [value]="item">
-                {{item.name}}
-            </mat-option>
-        </mat-select>
+<mat-form-field>
+    <mat-select [(ngModel)]="selectedItem" disableOptionCentering="true" multiple="true" panelClass="custom-panel"
+        placeholder="hello" #select>
+        <mat-select-trigger>
+            <div *ngFor="let option of selectedItem">
+                <span>{{option?.name}}</span>
+                <br />
+            </div>
+        </mat-select-trigger>
+        <mat-option>-- None --</mat-option>
+        <mat-option *ngFor="let item of items" [value]="item">
+            {{item.name}}
+        </mat-option>
+    </mat-select>
 
-        <mat-icon matSuffix>arrow_drop_down</mat-icon>
-    </mat-form-field>
-</div>
+    <mat-icon matSuffix>arrow_drop_down</mat-icon>
+</mat-form-field>
