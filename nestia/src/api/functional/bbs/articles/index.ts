@@ -44,7 +44,7 @@ export namespace index
     export type Output = IPage<IBbsArticle.ISummary>;
 
     export const METHOD = "PATCH" as const;
-    export const PATH = "/bbs/articles/:section";
+    export const PATH: string = "/bbs/articles/:section";
     export const ENCRYPTED: Fetcher.IEncrypted = {
         request: false,
         response: false,
@@ -88,7 +88,7 @@ export namespace at
     export type Output = IBbsArticle;
 
     export const METHOD = "GET" as const;
-    export const PATH = "/bbs/articles/:section/:id";
+    export const PATH: string = "/bbs/articles/:section/:id";
     export const ENCRYPTED: Fetcher.IEncrypted = {
         request: false,
         response: false,
@@ -134,7 +134,7 @@ export namespace store
     export type Output = IBbsArticle;
 
     export const METHOD = "POST" as const;
-    export const PATH = "/bbs/articles/:section";
+    export const PATH: string = "/bbs/articles/:section";
     export const ENCRYPTED: Fetcher.IEncrypted = {
         request: false,
         response: false,
@@ -186,7 +186,7 @@ export namespace update
     export type Output = IBbsArticle.ISnapshot;
 
     export const METHOD = "PUT" as const;
-    export const PATH = "/bbs/articles/:section/:id";
+    export const PATH: string = "/bbs/articles/:section/:id";
     export const ENCRYPTED: Fetcher.IEncrypted = {
         request: false,
         response: false,
