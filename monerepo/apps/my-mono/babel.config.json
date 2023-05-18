@@ -1,0 +1,17 @@
+{
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": "chrome > 60"
+        }
+      ]
+    ],
+    "plugins": [
+        ["add-header-comment", {
+          "header": [
+            "This string will be inserted in a comment header"
+          ]
+        }]
+    ]
+  }

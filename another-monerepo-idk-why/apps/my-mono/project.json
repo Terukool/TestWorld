@@ -1,0 +1,65 @@
+{
+  "name": "my-mono",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/my-mono/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/my-mono",
+        "main": "apps/my-mono/src/main.ts",
+        "tsConfig": "apps/my-mono/tsconfig.app.json",
+        "assets": ["apps/my-mono/src/assets"],
+        "isolatedConfig": true,
+        "configFile": "apps/my-mono/vite.config.ts"
+      },
+      "configurations": {
+        "develop": {
+          "watch": true
+        },
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/vite:dev-server",
+      "options": {
+        "buildTarget": "my-mono:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "my-mono:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/my-mono/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/my-mono/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
