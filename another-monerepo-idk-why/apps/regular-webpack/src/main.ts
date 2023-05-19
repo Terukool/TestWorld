@@ -13,7 +13,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3333;
 
-  const config = new DocumentBuilder().setTitle('My Api').build();
+  const config = new DocumentBuilder().setTitle('My Api').addSecurity('very secure', { type: 'apiKey', in: 'header', description: 'spooky'}) .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
   

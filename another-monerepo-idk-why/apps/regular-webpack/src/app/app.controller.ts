@@ -6,6 +6,7 @@ import { HeliosController } from './helios-controller';
 export class AppController {
   @Get('1:/:anotherId')
   getDataById(@Param('id') id: string, @Param('baseId') baseId: string, @Param('anotherId') anotherId: string) {
+    debugger;
     return id + baseId + anotherId + ' found';
   }
 

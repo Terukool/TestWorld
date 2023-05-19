@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "monerepo",
+  "defaultProject": "regular-webpack",
   "affected": {
     "defaultBase": "master"
   },
