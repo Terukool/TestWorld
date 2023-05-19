@@ -5,15 +5,14 @@
       "name": "Launch",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceFolder}/node_modules/@nrwl/cli/bin/nx.js",
-      "cwd": "${fileDirname}",
+      "cwd": "${workspaceFolder}",
       "sourceMaps": true,
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["start"],
-      "console": "integratedTerminal",
+      "runtimeArgs": ["ts-node", "./scripts/launch.ts"],
       "env": {
         "NODE_ENV": "development",
-        "NX_WORKSPACE_ROOT_PATH": "${fileDirname}"
+        "NX_WORKSPACE_ROOT_PATH": "${workspaceFolder}",
+        "WORKSPACE_ROOT_PATH": "${fileDirname}",
       }
     }
   ]
