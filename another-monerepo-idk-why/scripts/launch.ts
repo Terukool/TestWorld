@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-
+import debug from 'debug';
 const projectDirectory = process.env.WORKSPACE_ROOT_PATH;
 
 if (!projectDirectory?.includes('apps')) 
@@ -10,35 +10,32 @@ const projectName = restOfPath.split('\\')[1];
 
 console.log(`Running ${projectName}...`);
 
-// Replace the current process with the nx process
-
-
 const nxProcess = exec(`yarn nx run ${projectName}:serve:webpack`, (err : unknown, stdout: unknown, stderr: unknown) => {
     if (err) {
-        console.log(err);
+        debug(err.toString());
         return;
     }
 
-    console.log(stdout);
-    console.log(stderr);
+    stdout && debug(stdout.toString());
+    stderr && debug(stderr.toString());
 });
 
 nxProcess.stdout?.on('data', (data : unknown) => {
-    if (!data || typeof data !== 'string') {
+    if (!data) {
         return;
     }
 
-    console.log(data.trim());
+    debug(data.toString());
 });
 
-nxProcess.stderr?.on('data', (data : unknown) => {
-    if (!data || typeof data !== 'string') {
+nxProcess.stdout?.on('error', (data : unknown) => {
+    if (!data) {
         return;
     }
 
-    console.log(data.trim());
+    debug(data.toString());
 });
 
-nxProcess.on('exit', (code) => {
+nxProcess.on('message', (code) => {
     console.log(`nx process exited with code ${code}`);
 });
