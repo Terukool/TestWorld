@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { debug } from 'debug';
+import { debuglog } from 'util';
 
 const projectDirectory = process.env.WORKSPACE_ROOT_PATH;
 
@@ -11,8 +11,8 @@ const projectName = restOfPath.split('\\')[1];
 
 console.log(`Running ${projectName}...`);
 
-const errorDebug = debug('error');
-const infoDebug = debug('info');
+const errorDebug = debuglog('error');
+const infoDebug = debuglog('info');
 
 const nxProcess = exec(`yarn nx run ${projectName}:serve:webpack`, (err : unknown, stdout: unknown, stderr: unknown) => {
     if (err) {
