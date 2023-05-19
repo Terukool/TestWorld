@@ -5,7 +5,6 @@
       "name": "Launch",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}",
       "sourceMaps": true,
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["ts-node", "./scripts/launch.ts"],

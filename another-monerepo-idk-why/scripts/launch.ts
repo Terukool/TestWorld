@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
-import debug from 'debug';
+import { debug } from 'debug';
+
 const projectDirectory = process.env.WORKSPACE_ROOT_PATH;
 
 if (!projectDirectory?.includes('apps')) 
@@ -10,14 +11,17 @@ const projectName = restOfPath.split('\\')[1];
 
 console.log(`Running ${projectName}...`);
 
+const errorDebug = debug('error');
+const infoDebug = debug('info');
+
 const nxProcess = exec(`yarn nx run ${projectName}:serve:webpack`, (err : unknown, stdout: unknown, stderr: unknown) => {
     if (err) {
-        debug(err.toString());
+        errorDebug(err.toString());
         return;
     }
 
-    stdout && debug(stdout.toString());
-    stderr && debug(stderr.toString());
+    stdout && infoDebug(stdout.toString());
+    stderr && errorDebug(stderr.toString());
 });
 
 nxProcess.stdout?.on('data', (data : unknown) => {
@@ -25,7 +29,7 @@ nxProcess.stdout?.on('data', (data : unknown) => {
         return;
     }
 
-    debug(data.toString());
+    infoDebug(data.toString());
 });
 
 nxProcess.stdout?.on('error', (data : unknown) => {
@@ -33,7 +37,7 @@ nxProcess.stdout?.on('error', (data : unknown) => {
         return;
     }
 
-    debug(data.toString());
+    errorDebug(data.toString());
 });
 
 nxProcess.on('message', (code) => {
